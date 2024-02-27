@@ -19,6 +19,9 @@ namespace CircusWPF.DB
         public string login { get; set; }
         public string password { get; set; }
         public Nullable<int> IdEmployee { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
     
         public virtual Roles Roles { get; set; }
     }

@@ -29,7 +29,7 @@ namespace CircusWPF.Pages.Admin
             InitializeComponent();
             user = Authorization.regUser;
             role = Authorization.Role;
-            FIOTb.Text = user.Id.ToString();
+            FIOTb.Text = $"{user.Surname} {user.Name[0]}. {user.Patronymic[0]}.";
             RoleTb.Text = role.Name.ToString();
         }
 
