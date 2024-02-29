@@ -8,12 +8,110 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EmployeesMainPage">
 
-    <Grid>
+    <Grid Background="White">
+        <StackPanel>
+            <StackPanel Margin="0 20 0 20">
+                <Button x:Name="BackBnt" 
+                    Width="60" Height="30"
+                    Content="← Back" FontSize="16"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 0" Click="BackBnt_Click"/>
+                <TextBlock Text="Cотрудники" FontSize="30"
+                               HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="15">
+                        <StackPanel Margin="5" VerticalAlignment="Center">
+                            <TextBlock Text="Фамилия" 
+                                   Margin="5"
+                                   FontSize="15"/>
 
-        <Button x:Name="BackBnt" 
-                Width="60" Height="30"
-                Content="← Back" FontSize="16"
-                HorizontalAlignment="Left"
-                Margin="15 0 0 0" Click="BackBnt_Click"/>
+                            <TextBlock Text="Имя" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Отчество" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Дата рождения" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Логин" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Пароль" 
+                                   Margin="5"
+                                   FontSize="15"/>
+
+                        </StackPanel>
+                        <StackPanel Margin="5" VerticalAlignment="Center">
+                            <TextBox x:Name="SurnameTb"
+                                  Margin="5"
+                                  Width="150" FontSize="15"/>
+                            <TextBox x:Name="NameTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/>
+                            <TextBox x:Name="PatronymicTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/>
+                            <DatePicker Margin="5" FontSize="15"/>
+
+                            <TextBox x:Name="LoginTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/>
+                            <TextBox x:Name="PasswordTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="AddBtn"
+                            Content="Добавить сотрудника"
+                            Width="170"
+                            FontSize="17"/>
+                </StackPanel>
+                <StackPanel Margin="15">
+                    <ListView x:Name="UsersSlv" Width="380"
+                              ItemsSource="{Binding users}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="ФИО"
+                                                    Width="130">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Surname}"/>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                    <TextBlock Text="{Binding Patronymic}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Дата рождения"
+                                                    Width="130">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Birthday}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Должность"
+                                                    Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Roles.Name}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

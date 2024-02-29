@@ -5,12 +5,111 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище CircusModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" />
+          <Property Name="QuantityEvent" Type="int" />
+        </EntityType>
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Age" Type="int" />
+          <Property Name="IdGender" Type="int" />
+          <Property Name="Weight" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="FoodDesc" Type="text" />
+          <Property Name="CareDesc" Type="text" />
+          <Property Name="IdTrainer" Type="int" />
+        </EntityType>
+        <EntityType Name="Cabinet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IdHall" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Halls">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdTypeEvent" Type="int" />
+        </EntityType>
+        <EntityType Name="Promoter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PromoTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ScheduleEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="IdEvent" Type="int" />
+          <Property Name="IdEmployee" Type="int" />
+          <Property Name="IdPromoter" Type="int" />
+          <Property Name="IdPromoType" Type="int" />
+          <Property Name="Prepayment" Type="money" />
+          <Property Name="Expenses" Type="money" />
+          <Property Name="TicketsProfit" Type="money" />
+          <Property Name="Profit" Type="money" />
+        </EntityType>
+        <EntityType Name="ScheduleTrainings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdAnimal" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Time" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuantityEvent" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -22,6 +121,13 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TypesEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,11 +136,143 @@
           <Property Name="IdRole" Type="int" />
           <Property Name="login" Type="nvarchar" MaxLength="50" />
           <Property Name="password" Type="nvarchar" MaxLength="50" />
-          <Property Name="IdEmployee" Type="int" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
         </EntityType>
+        <Association Name="FK_Actor_Statuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Actor" Type="Self.Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actor">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdTrainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cabinet_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cabinet">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Halls">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Halls_TypesEvent">
+          <End Role="TypesEvent" Type="Self.TypesEvent" Multiplicity="0..1" />
+          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesEvent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="IdTypeEvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="ScheduleEvent" Type="Self.ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdEvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Promoter">
+          <End Role="Promoter" Type="Self.Promoter" Multiplicity="0..1" />
+          <End Role="ScheduleEvent" Type="Self.ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promoter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdPromoter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_PromoTypes">
+          <End Role="PromoTypes" Type="Self.PromoTypes" Multiplicity="0..1" />
+          <End Role="ScheduleEvent" Type="Self.ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromoTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdPromoType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ScheduleEvent" Type="Self.ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTrainings_Animals">
+          <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+          <End Role="ScheduleTrainings" Type="Self.ScheduleTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleTrainings">
+              <PropertyRef Name="IdAnimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -48,9 +286,65 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище CircusModelContainer">
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cabinet" EntityType="Self.Cabinet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promoter" EntityType="Self.Promoter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PromoTypes" EntityType="Self.PromoTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleEvent" EntityType="Self.ScheduleEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleTrainings" EntityType="Self.ScheduleTrainings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesEvent" EntityType="Self.TypesEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Actor_Statuses" Association="Self.FK_Actor_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Actor" EntitySet="Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_Gender" Association="Self.FK_Animals_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_Users" Association="Self.FK_Animals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cabinet_Users" Association="Self.FK_Cabinet_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cabinet" EntitySet="Cabinet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Halls" Association="Self.FK_Event_Halls">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Halls_TypesEvent" Association="Self.FK_Halls_TypesEvent">
+            <End Role="TypesEvent" EntitySet="TypesEvent" />
+            <End Role="Halls" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Event" Association="Self.FK_ScheduleEvent_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Promoter" Association="Self.FK_ScheduleEvent_Promoter">
+            <End Role="Promoter" EntitySet="Promoter" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_PromoTypes" Association="Self.FK_ScheduleEvent_PromoTypes">
+            <End Role="PromoTypes" EntitySet="PromoTypes" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Users" Association="Self.FK_ScheduleEvent_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTrainings_Animals" Association="Self.FK_ScheduleTrainings_Animals">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="ScheduleTrainings" EntitySet="ScheduleTrainings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
@@ -86,11 +380,14 @@
           <Property Name="IdRole" Type="Int32" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdEmployee" Type="Int32" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Animals" Relationship="CircusModel.FK_Animals_Users" FromRole="Users" ToRole="Animals" />
+          <NavigationProperty Name="Cabinet" Relationship="CircusModel.FK_Cabinet_Users" FromRole="Users" ToRole="Cabinet" />
+          <NavigationProperty Name="ScheduleEvent" Relationship="CircusModel.FK_ScheduleEvent_Users" FromRole="Users" ToRole="ScheduleEvent" />
         </EntityType>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
@@ -112,7 +409,320 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Actor" EntityType="CircusModel.Actor" />
+          <EntitySet Name="Animals" EntityType="CircusModel.Animals" />
+          <EntitySet Name="Cabinet" EntityType="CircusModel.Cabinet" />
+          <EntitySet Name="Event" EntityType="CircusModel.Event" />
+          <EntitySet Name="Gender" EntityType="CircusModel.Gender" />
+          <EntitySet Name="Halls" EntityType="CircusModel.Halls" />
+          <EntitySet Name="Promoter" EntityType="CircusModel.Promoter" />
+          <EntitySet Name="PromoTypes" EntityType="CircusModel.PromoTypes" />
+          <EntitySet Name="ScheduleEvent" EntityType="CircusModel.ScheduleEvent" />
+          <EntitySet Name="ScheduleTrainings" EntityType="CircusModel.ScheduleTrainings" />
+          <EntitySet Name="Statuses" EntityType="CircusModel.Statuses" />
+          <EntitySet Name="TypesEvent" EntityType="CircusModel.TypesEvent" />
+          <AssociationSet Name="FK_Actor_Statuses" Association="CircusModel.FK_Actor_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Actor" EntitySet="Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_Gender" Association="CircusModel.FK_Animals_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_Users" Association="CircusModel.FK_Animals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTrainings_Animals" Association="CircusModel.FK_ScheduleTrainings_Animals">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="ScheduleTrainings" EntitySet="ScheduleTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cabinet_Users" Association="CircusModel.FK_Cabinet_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cabinet" EntitySet="Cabinet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Halls" Association="CircusModel.FK_Event_Halls">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Event" Association="CircusModel.FK_ScheduleEvent_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Halls_TypesEvent" Association="CircusModel.FK_Halls_TypesEvent">
+            <End Role="TypesEvent" EntitySet="TypesEvent" />
+            <End Role="Halls" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Promoter" Association="CircusModel.FK_ScheduleEvent_Promoter">
+            <End Role="Promoter" EntitySet="Promoter" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_PromoTypes" Association="CircusModel.FK_ScheduleEvent_PromoTypes">
+            <End Role="PromoTypes" EntitySet="PromoTypes" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleEvent_Users" Association="CircusModel.FK_ScheduleEvent_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ScheduleEvent" EntitySet="ScheduleEvent" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" />
+          <Property Name="QuantityEvent" Type="Int32" />
+          <NavigationProperty Name="Statuses" Relationship="CircusModel.FK_Actor_Statuses" FromRole="Actor" ToRole="Statuses" />
+        </EntityType>
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="IdGender" Type="Int32" />
+          <Property Name="Weight" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="FoodDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CareDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTrainer" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="CircusModel.FK_Animals_Gender" FromRole="Animals" ToRole="Gender" />
+          <NavigationProperty Name="Users" Relationship="CircusModel.FK_Animals_Users" FromRole="Animals" ToRole="Users" />
+          <NavigationProperty Name="ScheduleTrainings" Relationship="CircusModel.FK_ScheduleTrainings_Animals" FromRole="Animals" ToRole="ScheduleTrainings" />
+        </EntityType>
+        <EntityType Name="Cabinet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="CircusModel.FK_Cabinet_Users" FromRole="Cabinet" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdHall" Type="Int32" />
+          <NavigationProperty Name="Halls" Relationship="CircusModel.FK_Event_Halls" FromRole="Event" ToRole="Halls" />
+          <NavigationProperty Name="ScheduleEvent" Relationship="CircusModel.FK_ScheduleEvent_Event" FromRole="Event" ToRole="ScheduleEvent" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Animals" Relationship="CircusModel.FK_Animals_Gender" FromRole="Gender" ToRole="Animals" />
+        </EntityType>
+        <EntityType Name="Halls">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTypeEvent" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="CircusModel.FK_Event_Halls" FromRole="Halls" ToRole="Event" />
+          <NavigationProperty Name="TypesEvent" Relationship="CircusModel.FK_Halls_TypesEvent" FromRole="Halls" ToRole="TypesEvent" />
+        </EntityType>
+        <EntityType Name="Promoter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScheduleEvent" Relationship="CircusModel.FK_ScheduleEvent_Promoter" FromRole="Promoter" ToRole="ScheduleEvent" />
+        </EntityType>
+        <EntityType Name="PromoTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScheduleEvent" Relationship="CircusModel.FK_ScheduleEvent_PromoTypes" FromRole="PromoTypes" ToRole="ScheduleEvent" />
+        </EntityType>
+        <EntityType Name="ScheduleEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="IdEvent" Type="Int32" />
+          <Property Name="IdEmployee" Type="Int32" />
+          <Property Name="IdPromoter" Type="Int32" />
+          <Property Name="IdPromoType" Type="Int32" />
+          <Property Name="Prepayment" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Expenses" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TicketsProfit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Profit" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Event" Relationship="CircusModel.FK_ScheduleEvent_Event" FromRole="ScheduleEvent" ToRole="Event" />
+          <NavigationProperty Name="Promoter" Relationship="CircusModel.FK_ScheduleEvent_Promoter" FromRole="ScheduleEvent" ToRole="Promoter" />
+          <NavigationProperty Name="PromoTypes" Relationship="CircusModel.FK_ScheduleEvent_PromoTypes" FromRole="ScheduleEvent" ToRole="PromoTypes" />
+          <NavigationProperty Name="Users" Relationship="CircusModel.FK_ScheduleEvent_Users" FromRole="ScheduleEvent" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ScheduleTrainings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdAnimal" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <NavigationProperty Name="Animals" Relationship="CircusModel.FK_ScheduleTrainings_Animals" FromRole="ScheduleTrainings" ToRole="Animals" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuantityEvent" Type="Int32" />
+          <NavigationProperty Name="Actor" Relationship="CircusModel.FK_Actor_Statuses" FromRole="Statuses" ToRole="Actor" />
+        </EntityType>
+        <EntityType Name="TypesEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Halls" Relationship="CircusModel.FK_Halls_TypesEvent" FromRole="TypesEvent" ToRole="Halls" />
+        </EntityType>
+        <Association Name="FK_Actor_Statuses">
+          <End Type="CircusModel.Statuses" Role="Statuses" Multiplicity="0..1" />
+          <End Type="CircusModel.Actor" Role="Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actor">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_Gender">
+          <End Type="CircusModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="CircusModel.Animals" Role="Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_Users">
+          <End Type="CircusModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="CircusModel.Animals" Role="Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdTrainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTrainings_Animals">
+          <End Type="CircusModel.Animals" Role="Animals" Multiplicity="0..1" />
+          <End Type="CircusModel.ScheduleTrainings" Role="ScheduleTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleTrainings">
+              <PropertyRef Name="IdAnimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cabinet_Users">
+          <End Type="CircusModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="CircusModel.Cabinet" Role="Cabinet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cabinet">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Halls">
+          <End Type="CircusModel.Halls" Role="Halls" Multiplicity="0..1" />
+          <End Type="CircusModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Event">
+          <End Type="CircusModel.Event" Role="Event" Multiplicity="0..1" />
+          <End Type="CircusModel.ScheduleEvent" Role="ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdEvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Halls_TypesEvent">
+          <End Type="CircusModel.TypesEvent" Role="TypesEvent" Multiplicity="0..1" />
+          <End Type="CircusModel.Halls" Role="Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesEvent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="IdTypeEvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Promoter">
+          <End Type="CircusModel.Promoter" Role="Promoter" Multiplicity="0..1" />
+          <End Type="CircusModel.ScheduleEvent" Role="ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promoter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdPromoter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_PromoTypes">
+          <End Type="CircusModel.PromoTypes" Role="PromoTypes" Multiplicity="0..1" />
+          <End Type="CircusModel.ScheduleEvent" Role="ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromoTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdPromoType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleEvent_Users">
+          <End Type="CircusModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="CircusModel.ScheduleEvent" Role="ScheduleEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleEvent">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -141,6 +751,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CircusModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -148,7 +759,124 @@
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actor">
+            <EntityTypeMapping TypeName="CircusModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="QuantityEvent" ColumnName="QuantityEvent" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animals">
+            <EntityTypeMapping TypeName="CircusModel.Animals">
+              <MappingFragment StoreEntitySet="Animals">
+                <ScalarProperty Name="IdTrainer" ColumnName="IdTrainer" />
+                <ScalarProperty Name="CareDesc" ColumnName="CareDesc" />
+                <ScalarProperty Name="FoodDesc" ColumnName="FoodDesc" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cabinet">
+            <EntityTypeMapping TypeName="CircusModel.Cabinet">
+              <MappingFragment StoreEntitySet="Cabinet">
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="CircusModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="IdHall" ColumnName="IdHall" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="CircusModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Halls">
+            <EntityTypeMapping TypeName="CircusModel.Halls">
+              <MappingFragment StoreEntitySet="Halls">
+                <ScalarProperty Name="IdTypeEvent" ColumnName="IdTypeEvent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promoter">
+            <EntityTypeMapping TypeName="CircusModel.Promoter">
+              <MappingFragment StoreEntitySet="Promoter">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromoTypes">
+            <EntityTypeMapping TypeName="CircusModel.PromoTypes">
+              <MappingFragment StoreEntitySet="PromoTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleEvent">
+            <EntityTypeMapping TypeName="CircusModel.ScheduleEvent">
+              <MappingFragment StoreEntitySet="ScheduleEvent">
+                <ScalarProperty Name="Profit" ColumnName="Profit" />
+                <ScalarProperty Name="TicketsProfit" ColumnName="TicketsProfit" />
+                <ScalarProperty Name="Expenses" ColumnName="Expenses" />
+                <ScalarProperty Name="Prepayment" ColumnName="Prepayment" />
+                <ScalarProperty Name="IdPromoType" ColumnName="IdPromoType" />
+                <ScalarProperty Name="IdPromoter" ColumnName="IdPromoter" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleTrainings">
+            <EntityTypeMapping TypeName="CircusModel.ScheduleTrainings">
+              <MappingFragment StoreEntitySet="ScheduleTrainings">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdAnimal" ColumnName="IdAnimal" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="CircusModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="QuantityEvent" ColumnName="QuantityEvent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesEvent">
+            <EntityTypeMapping TypeName="CircusModel.TypesEvent">
+              <MappingFragment StoreEntitySet="TypesEvent">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

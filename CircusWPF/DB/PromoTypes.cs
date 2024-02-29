@@ -12,30 +12,17 @@ namespace CircusWPF.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class PromoTypes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public PromoTypes()
         {
-            this.Animals = new HashSet<Animals>();
-            this.Cabinet = new HashSet<Cabinet>();
             this.ScheduleEvent = new HashSet<ScheduleEvent>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdRole { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string Surname { get; set; }
         public string Name { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
     
-        public virtual Roles Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Animals> Animals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cabinet> Cabinet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleEvent> ScheduleEvent { get; set; }
     }

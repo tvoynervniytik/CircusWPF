@@ -12,31 +12,27 @@ namespace CircusWPF.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Animals
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Animals()
         {
-            this.Animals = new HashSet<Animals>();
-            this.Cabinet = new HashSet<Cabinet>();
-            this.ScheduleEvent = new HashSet<ScheduleEvent>();
+            this.ScheduleTrainings = new HashSet<ScheduleTrainings>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdRole { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string Surname { get; set; }
         public string Name { get; set; }
-        public string Patronymic { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<int> Age { get; set; }
+        public Nullable<int> IdGender { get; set; }
+        public Nullable<decimal> Weight { get; set; }
+        public string FoodDesc { get; set; }
+        public string CareDesc { get; set; }
+        public Nullable<int> IdTrainer { get; set; }
     
-        public virtual Roles Roles { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Animals> Animals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cabinet> Cabinet { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ScheduleEvent> ScheduleEvent { get; set; }
+        public virtual ICollection<ScheduleTrainings> ScheduleTrainings { get; set; }
     }
 }

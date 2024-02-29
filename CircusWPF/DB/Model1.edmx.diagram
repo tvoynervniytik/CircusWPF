@@ -9,6 +9,29 @@
         <EntityTypeShape EntityType="CircusModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CircusModel.Users" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="CircusModel.FK_Users_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CircusModel.Actor" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="CircusModel.Animals" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="CircusModel.Cabinet" Width="1.5" PointX="5.625" PointY="8.75" />
+        <EntityTypeShape EntityType="CircusModel.Event" Width="1.5" PointX="10.25" PointY="4.625" />
+        <EntityTypeShape EntityType="CircusModel.Gender" Width="1.5" PointX="3.375" PointY="9.625" />
+        <EntityTypeShape EntityType="CircusModel.Halls" Width="1.5" PointX="8" PointY="4.75" />
+        <EntityTypeShape EntityType="CircusModel.Promoter" Width="1.5" PointX="10.25" PointY="11.875" />
+        <EntityTypeShape EntityType="CircusModel.PromoTypes" Width="1.5" PointX="10.25" PointY="9.5" />
+        <EntityTypeShape EntityType="CircusModel.ScheduleEvent" Width="1.5" PointX="12.5" PointY="3.5" />
+        <EntityTypeShape EntityType="CircusModel.ScheduleTrainings" Width="1.5" PointX="7.875" PointY="10" />
+        <EntityTypeShape EntityType="CircusModel.Statuses" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="CircusModel.TypesEvent" Width="1.5" PointX="5.75" PointY="5" />
+        <AssociationConnector Association="CircusModel.FK_Actor_Statuses" />
+        <AssociationConnector Association="CircusModel.FK_Animals_Gender" />
+        <AssociationConnector Association="CircusModel.FK_Animals_Users" />
+        <AssociationConnector Association="CircusModel.FK_ScheduleTrainings_Animals" />
+        <AssociationConnector Association="CircusModel.FK_Cabinet_Users" />
+        <AssociationConnector Association="CircusModel.FK_Event_Halls" />
+        <AssociationConnector Association="CircusModel.FK_ScheduleEvent_Event" />
+        <AssociationConnector Association="CircusModel.FK_Halls_TypesEvent" />
+        <AssociationConnector Association="CircusModel.FK_ScheduleEvent_Promoter" />
+        <AssociationConnector Association="CircusModel.FK_ScheduleEvent_PromoTypes" />
+        <AssociationConnector Association="CircusModel.FK_ScheduleEvent_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

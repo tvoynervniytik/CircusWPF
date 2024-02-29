@@ -28,5 +28,17 @@ namespace CircusWPF.DB
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Actor> Actor { get; set; }
+        public virtual DbSet<Animals> Animals { get; set; }
+        public virtual DbSet<Cabinet> Cabinet { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Halls> Halls { get; set; }
+        public virtual DbSet<Promoter> Promoter { get; set; }
+        public virtual DbSet<PromoTypes> PromoTypes { get; set; }
+        public virtual DbSet<ScheduleEvent> ScheduleEvent { get; set; }
+        public virtual DbSet<ScheduleTrainings> ScheduleTrainings { get; set; }
+        public virtual DbSet<Statuses> Statuses { get; set; }
+        public virtual DbSet<TypesEvent> TypesEvent { get; set; }
     }
 }
