@@ -49,12 +49,9 @@ namespace CircusWPF.Pages.Admin
             {
                 DateTime af = (DateTime)DateDp.SelectedDate;
                 AgeTb.Text = (-af.Year + DateTime.Now.Year).ToString();
-                MessageBox.Show(af.GetType().ToString());
             }
             else
             { AgeTb.Text = " "; }
-            var a = DateDp.SelectedDate;
-            
         }
     }
 }
