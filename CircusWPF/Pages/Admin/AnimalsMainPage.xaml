@@ -8,12 +8,140 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AnimalsMainPage">
 
-    <Grid>
-
-        <Button x:Name="BackBnt" 
-                Width="60" Height="30"
-                Content="← Back" FontSize="16"
-                HorizontalAlignment="Left"
-                Margin="15 0 0 0" Click="BackBnt_Click"/>
+    <Grid Background="White">
+        <StackPanel>
+            <StackPanel Margin="0 20 0 0">
+                <Button x:Name="BackBnt" 
+                    Width="60" Height="30"
+                    Content="← Back" FontSize="16"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 -20" Click="BackBnt_Click"/>
+                <TextBlock Text="Животные" FontSize="30"
+                               HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="15">
+                        <StackPanel Margin="5" VerticalAlignment="Center">
+                            <TextBlock Text="Имя" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Дата рождения" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                            <TextBlock Text="Возраст" 
+                                       Margin="5 14 5 14"
+                                       FontSize="15"/>
+                            <TextBlock Text="Пол" 
+                                       Margin="5"
+                                       FontSize="15"/>
+                            <TextBlock Text="Вес" 
+                                       Margin="5"
+                                       FontSize="15"/>
+                            <TextBlock Text="Питание" 
+                                       Margin="5"
+                                       FontSize="15"/>
+                            <TextBlock Text="Уход" 
+                                       Margin="5"
+                                       FontSize="15"/>
+                            <TextBlock Text="Тренер" 
+                                       Margin="5"
+                                       FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Margin="5" VerticalAlignment="Center">
+                            <TextBox x:Name="NameTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/>
+                            
+                            <DatePicker x:Name="DateDp" 
+                                        FontSize="15"/>
+                            <TextBlock x:Name="AgeTb"
+                                 Margin="5"
+                                 Width="150" FontSize="15"/> 
+                            <ComboBox x:Name="GenderCb"
+                                 Margin="5"
+                                 Width="150" FontSize="15">
+                                <ComboBoxItem>
+                                    Женский
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    Мужской
+                                </ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="WeightTb" 
+                                     Margin="5"
+                                     Width="150" FontSize="15"/>
+                            <TextBox x:Name="MealTb" 
+                                     Margin="5"
+                                     Width="150" FontSize="15"/>
+                            <TextBox x:Name="CareTb" 
+                                     Margin="5"
+                                     Width="150" FontSize="15"/>
+                            <ComboBox x:Name="TrainerCb" 
+                                     Margin="5"
+                                     Width="150" FontSize="15"
+                                      ItemsSource="{Binding users}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Surname}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="AddBtn"
+                            Content="Добавить животное"
+                            Width="170"
+                            FontSize="17" Click="AddBtn_Click"/>
+                </StackPanel>
+                <StackPanel Margin="15">
+                    <ListView x:Name="UsersSlv" Width="420"
+                              ItemsSource="{Binding animals}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Имя"
+                                                    Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Возраст"
+                                                    Width="90">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Age}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Вес"
+                                                    Width="90">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Weight}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Тренер"
+                                                    Width="130">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Users.Surname}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="=" Width="30" Height="30" Click="Button_Click"/>
     </Grid>
 </Page>

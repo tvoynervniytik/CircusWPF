@@ -69,8 +69,8 @@
                     </StackPanel>
                     <Button x:Name="AddBtn"
                             Content="Добавить сотрудника"
-                            Width="170"
-                            FontSize="17"/>
+                            Width="180"
+                            FontSize="17" Click="AddBtn_Click"/>
                 </StackPanel>
                 <StackPanel Margin="15">
                     <ListView x:Name="UsersSlv" Width="380"

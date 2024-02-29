@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircusWPF.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,40 @@ namespace CircusWPF.Pages.Admin
     /// </summary>
     public partial class AnimalsMainPage : Page
     {
+        public static List<Animals> animals {  get; set; }
+        public static List<Gender> genders { get; set; }
+        public static List<Users> users { get; set; }
         public AnimalsMainPage()
         {
             InitializeComponent();
+            animals = new List<Animals>(DBConnection.circus.Animals.ToList());
+            genders = new List<Gender>(DBConnection.circus.Gender.ToList());
+            users = new List<Users>(DBConnection.circus.Users.ToList());
+            this.DataContext = this;
         }
 
         private void BackBnt_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (DateDp.SelectedDate != null)
+            {
+                DateTime af = (DateTime)DateDp.SelectedDate;
+                AgeTb.Text = (-af.Year + DateTime.Now.Year).ToString();
+                MessageBox.Show(af.GetType().ToString());
+            }
+            else
+            { AgeTb.Text = " "; }
+            var a = DateDp.SelectedDate;
+            
         }
     }
 }

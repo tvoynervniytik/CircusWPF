@@ -35,5 +35,10 @@ namespace CircusWPF.Pages.Admin
         {
             NavigationService.GoBack();
         }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
