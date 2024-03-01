@@ -38,7 +38,20 @@ namespace CircusWPF.Pages.Admin
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
+            Users user = new Users();
+            user.Surname = SurnameTb.Text.Trim();
+            user.Name = NameTb.Text.Trim();
+            user.Patronymic = PatronymicTb.Text.Trim();
+            user.Birthday = (DateTime)DateDp.SelectedDate;
+            var role = RoleCb.SelectedItem as Roles;
+            user.IdRole = role.Id;
+            user.login = LoginTb.Text.Trim();
+            user.password = PasswordTb.Text.Trim();
 
+            DBConnection.circus.Users.Add(user);
+            DBConnection.circus.SaveChanges();
+
+            UsersSlv.ItemsSource = new List<Users>(DBConnection.circus.Users.ToList());
         }
     }
 }
