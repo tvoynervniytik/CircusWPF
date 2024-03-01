@@ -40,18 +40,42 @@ namespace CircusWPF.Pages.Admin
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
+            Animals animal = new Animals();
+            animal.Name = NameTb.Text.Trim();
+            animal.Birthday = DateDp.SelectedDate;
+                DateTime selectedDate = (DateTime)DateDp.SelectedDate;
+                int age = -selectedDate.Year + DateTime.Now.Year;
+            animal.Age = age;
+            if (GenderCb.SelectedIndex == 0)
+                animal.IdGender = 1;
+            else animal.IdGender = 2;
+            animal.Weight = int.Parse(WeightTb.Text.Trim());
+            animal.FoodDesc = MealTb.Text.Trim();
+            animal.CareDesc = CareTb.Text.Trim();
+            //int a = users.FirstOrDefault(i => i.Surname == TrainerCb.SelectedItem).Id;
+            var curTrainer = TrainerCb.SelectedItem as Users;
+            animal.IdTrainer = curTrainer.Id;
 
+            DBConnection.circus.Animals.Add(animal);
+            DBConnection.circus.SaveChanges();
+
+            UsersSlv.ItemsSource = new List<Animals>(DBConnection.circus.Animals);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             if (DateDp.SelectedDate != null)
             {
-                DateTime af = (DateTime)DateDp.SelectedDate;
-                AgeTb.Text = (-af.Year + DateTime.Now.Year).ToString();
+                DateTime selectedDate = (DateTime)DateDp.SelectedDate;
+                int age = -selectedDate.Year + DateTime.Now.Year;
+                AgeTb.FontSize = 15;
+                AgeTb.Text = (age).ToString();
             }
             else
-            { AgeTb.Text = " "; }
+            {
+                MessageBox.Show("Введите дату для расчёта возраста", "Attention", MessageBoxButton.OK, MessageBoxImage.Exclamation); 
+            }
         }
     }
 }

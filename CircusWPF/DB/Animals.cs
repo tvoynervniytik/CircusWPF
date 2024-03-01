@@ -25,7 +25,7 @@ namespace CircusWPF.DB
         public Nullable<System.DateTime> Birthday { get; set; }
         public Nullable<int> Age { get; set; }
         public Nullable<int> IdGender { get; set; }
-        public Nullable<decimal> Weight { get; set; }
+        public Nullable<int> Weight { get; set; }
         public string FoodDesc { get; set; }
         public string CareDesc { get; set; }
         public Nullable<int> IdTrainer { get; set; }

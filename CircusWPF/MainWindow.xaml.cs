@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CircusWPF.Pages;
+using CircusWPF.Pages.Admin;
 
 namespace CircusWPF
 {

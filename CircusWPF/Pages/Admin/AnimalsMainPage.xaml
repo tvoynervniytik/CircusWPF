@@ -13,11 +13,11 @@
             <StackPanel Margin="0 20 0 0">
                 <Button x:Name="BackBnt" 
                     Width="60" Height="30"
-                    Content="← Back" FontSize="16"
+                    Content="← Back" FontSize="14"
                     HorizontalAlignment="Left"
-                    Margin="15 0 0 -20" Click="BackBnt_Click"/>
+                    Margin="15 0 0 -20" Click="BackBnt_Click" FontFamily="Century Gothic"/>
                 <TextBlock Text="Животные" FontSize="30"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center" FontFamily="Century Gothic" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
@@ -27,73 +27,77 @@
                                 Margin="15">
                         <StackPanel Margin="5" VerticalAlignment="Center">
                             <TextBlock Text="Имя" 
-                                   Margin="5"
-                                   FontSize="15"/>
+                                   Margin="6 0 6 6"
+                                       FontWeight="DemiBold"
+                                   FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Дата рождения" 
-                                   Margin="5"
-                                   FontSize="15"/>
+                                   Margin="6" FontWeight="DemiBold"
+                                   FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Возраст" 
-                                       Margin="0 0 0 10"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Пол" 
-                                       Margin="5"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Вес" 
-                                       Margin="5"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Питание" 
-                                       Margin="5"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Уход" 
-                                       Margin="5"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                             <TextBlock Text="Тренер" 
-                                       Margin="5"
-                                       FontSize="15"/>
+                                       Margin="6" FontWeight="DemiBold"
+                                       FontSize="15" FontFamily="Century Gothic"/>
                         </StackPanel>
                         <StackPanel Margin="5" VerticalAlignment="Center">
                             <TextBox x:Name="NameTb"
                                  Margin="5"
-                                 Width="150" FontSize="15"/>
+                                 Width="150" FontSize="15" FontFamily="Century Gothic"/>
                             
                             <DatePicker x:Name="DateDp" 
-                                        FontSize="15"/>
+                                        Width="150"
+                                        FontSize="15" FirstDayOfWeek="Monday" FontFamily="Century Gothic"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="расчёт" 
                                         FontSize="10"
+                                        Margin="5"
                                         Width="40" Height="20" 
-                                        Click="Button_Click"/>
+                                        Click="Button_Click" FontFamily="Century Gothic"/>
                                 <TextBlock x:Name="AgeTb"
-                                     Margin="5"
-                                     Width="150" FontSize="15"/>
+                                           Margin="0 5 7 5"
+                                           Text="введите дату"
+                                           Width="105" FontSize="12" FontFamily="Century Gothic"/>
                             </StackPanel>
                              
                             <ComboBox x:Name="GenderCb"
                                  Margin="5"
-                                 Width="150" FontSize="15">
-                                <ComboBoxItem>
+                                 Width="150" FontSize="15" FontFamily="Century Gothic">
+                                <ComboBoxItem FontFamily="Century Gothic">
                                     Женский
                                 </ComboBoxItem>
-                                <ComboBoxItem>
+                                <ComboBoxItem FontFamily="Century Gothic">
                                     Мужской
                                 </ComboBoxItem>
                             </ComboBox>
                             <TextBox x:Name="WeightTb" 
                                      Margin="5"
-                                     Width="150" FontSize="15"/>
+                                     Width="150" FontSize="15" FontFamily="Century Gothic"/>
                             <TextBox x:Name="MealTb" 
                                      Margin="5"
-                                     Width="150" FontSize="15"/>
+                                     Width="150" FontSize="15" FontFamily="Century Gothic"/>
                             <TextBox x:Name="CareTb" 
                                      Margin="5"
-                                     Width="150" FontSize="15"/>
+                                     Width="150" FontSize="15" FontFamily="Century Gothic"/>
                             <ComboBox x:Name="TrainerCb" 
                                      Margin="5"
                                      Width="150" FontSize="15"
-                                      ItemsSource="{Binding users}">
+                                      ItemsSource="{Binding users}" FontFamily="Century Gothic">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Surname}"></TextBlock>
+                                        <TextBlock Text="{Binding Surname}" FontFamily="Century Gothic"></TextBlock>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -101,12 +105,13 @@
                     </StackPanel>
                     <Button x:Name="AddBtn"
                             Content="Добавить животное"
-                            Width="170"
-                            FontSize="17" Click="AddBtn_Click"/>
+                            Width="190" FontWeight="DemiBold"
+                            FontSize="17" FontFamily="Century Gothic"
+                            Click="AddBtn_Click" />
                 </StackPanel>
                 <StackPanel Margin="15">
                     <ListView x:Name="UsersSlv" Width="420"
-                              ItemsSource="{Binding animals}">
+                              ItemsSource="{Binding animals}" FontFamily="Century Gothic">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -114,7 +119,7 @@
                                                     Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"/>
+                                                <TextBlock Text="{Binding Name}" FontFamily="Century Gothic"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -130,7 +135,7 @@
                                                     Width="90">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Weight}"/>
+                                                <TextBlock Text="{Binding Weight}" FontFamily="Century Gothic"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -138,7 +143,7 @@
                                                     Width="130">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Users.Surname}"/>
+                                                <TextBlock Text="{Binding Users.Surname}" FontFamily="Century Gothic"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

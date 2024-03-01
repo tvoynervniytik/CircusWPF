@@ -35,7 +35,8 @@ namespace CircusWPF.Pages.Admin
 
         private void BackBnt_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Вы уверены, что хотите выйти из профиля???", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Вы уверены, что хотите выйти из профиля???", "Подтверждение выхода", 
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes) 
                 NavigationService.Navigate(new AuthorizationPage());
         }
