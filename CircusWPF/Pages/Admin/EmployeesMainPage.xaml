@@ -15,9 +15,10 @@
                     Width="60" Height="30"
                     Content="← Back" FontSize="14"
                     HorizontalAlignment="Left"
-                    Margin="15 0 0 0" Click="BackBnt_Click" FontFamily="Century Gothic"/>
+                    Margin="15 0 0 -20" Click="BackBnt_Click" FontFamily="Century Gothic"/>
                 <TextBlock Text="Cотрудники" FontSize="30"
-                               HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Century Gothic"/>
+                           HorizontalAlignment="Center" 
+                           FontWeight="Bold" FontFamily="Century Gothic"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"

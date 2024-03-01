@@ -10,49 +10,53 @@
 
     <Grid Background="White">
         <StackPanel VerticalAlignment="Center">
+            <StackPanel Margin="0 20 0 6">
             <Button x:Name="BackBnt" 
                     Width="60" Height="30"
-                    Content="← Back" FontSize="16"
-                    HorizontalAlignment="Left"
-                    Margin="15 0 0 0" Click="BackBnt_Click"/>
-            <TextBlock Text="Главная" 
+                    Content="← Back" FontSize="14"
+                    HorizontalAlignment="Left" Padding="0 0 0 2"
+                    Margin="15 0 0 -20" Click="BackBnt_Click" 
+                    FontFamily="Century Gothic"/>
+                <TextBlock Text="Главная" 
                        HorizontalAlignment="Center"
-                       FontSize="30"/>
+                       FontWeight="Bold"
+                       FontSize="30" FontFamily="Century Gothic"/>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Center" 
-                        Margin="20">
+                        Margin="30">
                 <StackPanel Orientation="Horizontal" 
                             Margin="5">
                     <Button x:Name="EmployeesRegBtn" 
-                            Width="150" Height="50"
-                            Margin="10"
-                            Content="Сотрудники" FontSize="20" Click="EmployeesRegBtn_Click"/>
+                            Width="160" Height="50"
+                            Margin="10" FontWeight="DemiBold"
+                            Content="Сотрудники" FontSize="20" Click="EmployeesRegBtn_Click" FontFamily="Century Gothic"/>
                     <Button x:Name="AnimalsRegBtn" 
-                            Width="150" Height="50"
-                            Margin="10"
-                            Content="Животные" FontSize="20" Click="AnimalsRegBtn_Click"/>
+                            Width="160" Height="50"
+                            Margin="10" FontWeight="DemiBold"
+                            Content="Животные" FontSize="20" Click="AnimalsRegBtn_Click" FontFamily="Century Gothic"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Button x:Name="ScheduleBtn"
-                            Width="150" Height="50"
-                            Margin="10"
-                            Content="Расписание" FontSize="20" Click="ScheduleBtn_Click"/>
+                            Width="160" Height="50"
+                            Margin="10" FontWeight="DemiBold"
+                            Content="Расписание" FontSize="20" Click="ScheduleBtn_Click" FontFamily="Century Gothic"/>
                     <Button x:Name="TasksBtn" 
-                            Width="150" Height="50"
-                            Margin="10"
-                            Content="Задания" FontSize="20" Click="TasksBtn_Click"/>
+                            Width="160" Height="50"
+                            Margin="10" FontWeight="DemiBold"
+                            Content="Задания" FontSize="20" Click="TasksBtn_Click" FontFamily="Century Gothic"/>
                 </StackPanel>
                 <Button x:Name="CheckEmployeesBtn" 
-                        Width="320" Height="50"
-                        Margin="5"
-                        Content="Проверка работы сотрудников" FontSize="20" Click="CheckEmployeesBtn_Click"/>
+                        Width="340" Height="50"
+                        Margin="5" FontWeight="DemiBold"
+                        Content="Проверка работы сотрудников" FontSize="20" Click="CheckEmployeesBtn_Click" FontFamily="Century Gothic"/>
             </StackPanel>
             
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left"
                         Margin="10">
-                <TextBlock x:Name="FIOTb"
-                           FontSize="16" FontWeight="DemiBold"/>
-                <TextBlock x:Name="RoleTb"
-                           FontSize="16" FontStyle="Italic"/>
+                <TextBlock x:Name="FIOTb" Text="sffff333"
+                           FontSize="16" FontWeight="DemiBold" FontFamily="Century Gothic"/>
+                <TextBlock x:Name="RoleTb" Text="r4333333"
+                           FontSize="16" FontStyle="Italic" FontFamily="Century Gothic"/>
             </StackPanel>
         </StackPanel>
     </Grid>
